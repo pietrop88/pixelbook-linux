@@ -34,6 +34,7 @@
 ### tweak touchpad pressure for libinput
 
 - name: Ensure /etc/libinput exists
+  become: true
   file:
     path: /etc/libinput
     state: directory

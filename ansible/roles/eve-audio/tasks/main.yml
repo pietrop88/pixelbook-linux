@@ -28,7 +28,7 @@
     chdir: "{{ cras_workdir }}"
 
 - name: build cras
-  command: "make"
+  command: "make CFLAGS='-Wno-address-of-packed-member'"
   args:
     creates: "{{ cras_workdir }}/src/cras"
     chdir: "{{ cras_workdir }}"

@@ -1,0 +1,25 @@
+---
+- name: Upgrade the system 
+  become: true
+  pacman:
+    update_cache: yes
+    upgrade: yes
+ 
+- name: Install needed pacman packages
+  become: true
+  pacman:
+    name:
+      - unzip
+      - sbc
+      - iniparser
+      - ladspa
+      - acpid
+
+#- name: Ensure AUR build directory exists
+#  file:
+#    path: "{{ aur_builddir }}" 
+#    state: directory
+
+#- name: Download multipath-tools aur package
+#  git:
+#    repo: https://aur.archlinux.org/multipath-tools-git.git 
