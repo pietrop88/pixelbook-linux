@@ -8,11 +8,10 @@
 
  #### Copy files from eve recovery image 
 
-- name: Download eve recovery image
-  get_url:
-    url: "https://dl.google.com/dl/edgedl/chromeos/recovery/{{ eve_recovery_image }}.zip"
+- name: Copy eve recovery image
+  copy:
+    src: "{{ eve_recovery_image }}.zip"
     dest: "{{ main_workdir }}/eve-recovery.zip"
-    checksum: "sha256:{{ eve_recovery_image_sha256 }}"
 
 - name: Check if we've unzipped recovery image
   register: image_unzipped

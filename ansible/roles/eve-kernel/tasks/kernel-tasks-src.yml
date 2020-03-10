@@ -2,24 +2,21 @@
 - name: Create working dir to build packages
   become: true
   file:
-    path: "{{ main_workdir }}"
+    path: "{{ eve_kernel_workdir }}"
     mode: 0777
     state: directory
 
 #### Build & install chromium fork of linux kernel
+- name: Copy eve kernel sources
+  copy:
+    src: "{{ eve_kernel_targz}}"
+    dest: "{{ main_workdir }}/kernel.tar.gz" 
 
-- name: check if we've cloned the kernel source yet
-  register: kernel_cloned
-  stat:
-    path: "{{ eve_kernel_workdir }}"
-
-- name: Clone eve kernel sources
-  when: kernel_cloned.stat.exists == false
-  git:
-    repo: https://chromium.googlesource.com/chromiumos/third_party/kernel
-    depth: 1
-    dest: "{{ eve_kernel_workdir }}" 
-    version: "{{ eve_kernel_branch }}"
+- name: Unzip eve kernel source
+  unarchive:
+    src: "{{ main_workdir }}/kernel.tar.gz"
+    dest: "{{ eve_kernel_workdir }}"
+    remote_src: yes
 
 - name: Copy kernel config file
   copy:
