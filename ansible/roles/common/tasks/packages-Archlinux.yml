@@ -9,7 +9,7 @@
   become: true
   pacman:
     name:
-      - bs
+      - bc
       - base-devel
       - asp
       - gtest 
