@@ -1,3 +1,2 @@
 ---
 main_workdir: /opt/eve-linux-setup
-aur_builddir: "{{ main_workdir }}/aur"

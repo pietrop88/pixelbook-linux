@@ -1,15 +1,4 @@
 ---
-
-# Todo: move apt install to common role
-#- name: Install build dependencies
-#  become: true
-#  pacman:
-#    name:
-#      - gtest
-#      - jsoncpp
-#      - xorg-util-macros
-#      - xorg
-
 # libevdev (chromium fork)
 - name: Clone chromium fork of libevdev
   git:
