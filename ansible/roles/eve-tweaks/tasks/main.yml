@@ -64,11 +64,18 @@
     src: keyboard-screen-backlight-udev.rules
     dest: /lib/udev/rules.d/99-pixelbook.rules
 
-- name: Copy brightness control script
+- name: Copy keyboard brightness control script
   become: true
   copy:
     src: eve-keyboard-brightness.sh
     dest: /usr/local/bin/eve-keyboard-brightness.sh
+    mode: 0755
+
+- name: Copy screen brightness control script
+  become: true
+  copy:
+    src: eve-screen-brightness.sh
+    dest: /usr/local/bin/eve-screen-brightness.sh
     mode: 0755
 
 
