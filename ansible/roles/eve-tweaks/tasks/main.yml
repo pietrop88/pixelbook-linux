@@ -61,7 +61,7 @@
 - name: Copy pixelbook udev rules file
   become: true
   copy:
-    src: keyboard-backlight-udev.rules
+    src: keyboard-screen-backlight-udev.rules
     dest: /lib/udev/rules.d/99-pixelbook.rules
 
 - name: Copy brightness control script
