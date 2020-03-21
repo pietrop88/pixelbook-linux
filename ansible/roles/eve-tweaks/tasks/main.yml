@@ -47,7 +47,7 @@
     src: libinput-local-overrides.quirks
     dest: /etc/libinput/local-overrides.quirks
 
-### keyboard backlight
+### keyboard and screen backlight
 
 - name: Ensure "leds" group exists
   become: true
