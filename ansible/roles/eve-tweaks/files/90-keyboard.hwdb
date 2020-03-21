@@ -1,0 +1,3 @@
+evdev:atkbd:dmi:bvn*:bvr*:bd*:svn*:pn*:pvr*
+ KEYBOARD_KEY_5d=delete
+ KEYBOARD_KEY_db=capslock

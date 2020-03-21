@@ -78,22 +78,12 @@
     dest: /usr/local/bin/eve-screen-brightness.sh
     mode: 0755
 
-
-### Map google assistant key to super
-#
-#   note: change eve_keyboard_assistant_keycode var if you want a 
-#   different keycode for the google assistant key.
-#
-#   you can also set eve_keyboard_search_keycode to remap the search
-#   key from its default of Left Super (keycode leftmeta)
-- name: Copy keyboard hwdb file to remap assistant key
+- name: Copy keyboard hwdb file
   become: true
-  template:
-    src: 61-eve-keyboard.hwdb.j2
-    dest: /lib/udev/hwdb.d/61-eve-keyboard.hwdb
+  copy:
+    src: 90-eve-keyboard.hwdb
+    dest: /usr/lib/udev/hwdb.d/90-keyboard.hwdb
     mode: 0600
-    owner: root
-    group: root
 
 - name: Update hwdb to load keyboard rules
   become: true
