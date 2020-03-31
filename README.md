@@ -1,3 +1,90 @@
+# Pietro's Notes
+
+The branch *arch* contains all the info to install **Archlinux** on a Pixelbook using the last available kernel version (v5.5.9).
+
+## Open problems
+* audio: others (on the parent repo) solved this problem using the chromeos kernel version (v4.4) that contains the custom audio driver
+* suspend hibernate: suspend was solved in the parent repo flashing the [MrChromebox](https://mrchromebox.tech)'s UEFI firmware
+
+## Solved problems
+* screen brightness with custom kernel patch. Screen brightness can be controlled by writing an integer value between 0 and 65535 to /sys/class/backlight/intel_backlight/brightness. There's also a `eve-screen-brightness.sh` script installed in /usr/local/bin that you can use to more easily set the brightness
+* touchpad with same feeling as in ChromeOS (solved by parent repo, needs xorg)
+* caps lock key
+* delete action with the key above the backspace key
+
+Before starting please read the parent repo Readme that was intended to install standard ubuntu 19.04 desktop version using the same kernel used in ChromeOS.
+
+
+## On chrome OS
+
+### ChromeOS Firmware Utility Script
+Use the [ChromeOS Firmware Utility Script](https://mrchromebox.tech/#fwscript) of MrChromebox to Install/Update the RW_LEGACY firmware.
+
+### Partitions
+```
+cd;curl -O https://raw.githubusercontent.com/ethanmad/chromeos-resize/master/cros-resize.sh;sudo bash cros-resize.sh
+```
+Select GB, 50 GB for STATE partition and 1000 MB for KERN-C. Reboot.
+
+[Link1](https://saagarjha.com/blog/2019/03/13/dual-booting-chrome-os-and-elementary-os/), 
+[Link2](https://gist.github.com/daemonp/ecead946317b175e3b54731a513efe94)
+
+### Format
+```
+$ sudo /sbin/mkfs.ext4 /dev/nvme0n1p6
+$ sudo /sbin/mkfs.ext4 /dev/nvme0n1p7
+```
+
+### Re-enable ctrl+l on boot after suspend
+
+If the recovery boot screen is displayed, run the following command inside the ChromeOS shell to re-enable ctrl+l at boot:
+
+```
+sudo crossystem dev_boot_legacy=1
+```
+
+## On live distro
+
+Please follow the [Arch official guide steps](https://wiki.archlinux.org/index.php/Installation_guide).
+
+[Here](https://gist.github.com/pietrop88/9dce804b1f725ed9d5f047cd0ba7a66a), you can find the steps that I performed to install Arch on my Pixelbook.
+
+### touchpad, tweaks
+```
+sudo pacman -S python ansible git
+mkdir ~/ansible
+cd ~/ansible
+git clone https://github.com/pietrop88/pixelbook-linux.git
+cd pixelbook-linux
+git checkout arch
+./run-ansible.sh
+```
+
+### kernel
+The custom kernel is compiled with the *Arch Build System*.
+Before applying the following steps, read [this](https://wiki.archlinux.org/index.php/Kernel/Arch_Build_System) guide.
+
+```
+mkdir ~/kernel
+cd ~/kernel
+asp update linux
+asp export linuxcd linux
+# change pkgbase in PKGBUILD file t o linux-5.5.9-custom
+curl https://gist.githubusercontent.com/pietrop88/9dce804b1f725ed9d5f047cd0ba7a66a/raw/f827a30652a60d5d88b2bea46cdc46a8e6165d7c/dpcd.patch --output dpcd.patch
+# add dpcd.patch to PKGBUILD file (source list)
+makepkg -g
+# copy new checksums
+# update /etc/makepkg.conf enabling -j5
+makepkg -s
+sudo pacman -U linux-custom-headers-5.5.9.arch1-1-x86_64.pkg.tar.xz linux-custom-5.5.9.arch1-1-x86_64.pkg.tar.xz
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+sudo -s
+echo "options i915 enable_dpcd_backlight=2" > /etc/modprobe.d/i915.conf 
+exit
+```
+
+---
+
 # Installing "real" linux on a Google Pixelbook
 
 This repo documents the process of replacing ChromeOS on a stock [Google Pixelbook][pixelbook_product_page]
