@@ -12,7 +12,7 @@ Before starting please read the parent repo [Readme](README.md#installing-real-l
 * screen brightness with custom kernel patch. 
   
   Screen brightness can be controlled by writing an integer value between 0 and 65535 to `/sys/class/backlight/intel_backlight/brightness` file. There's also a `eve-screen-brightness.sh` script installed in `/usr/local/bin` that you can use to more easily set the brightness
-* touchpad with same feeling as in ChromeOS (solved by parent repo, **needs xorg**)
+* touchpad with same feelings as in ChromeOS (solved by parent repo, **needs xorg**)
 * caps lock key
 * delete key with the button above the backspace key
 * keyboard backlight (solved in the parent repo)
@@ -83,7 +83,7 @@ asp export linuxcd linux
 curl https://gist.githubusercontent.com/pietrop88/9dce804b1f725ed9d5f047cd0ba7a66a/raw/f827a30652a60d5d88b2bea46cdc46a8e6165d7c/dpcd.patch --output dpcd.patch
 # add dpcd.patch to PKGBUILD file (source list)
 makepkg -g
-# copy new checksums
+# copy new checksums in PKGBUILD
 # update /etc/makepkg.conf enabling -j5
 makepkg -s
 sudo pacman -U linux-custom-headers-5.5.9.arch1-1-x86_64.pkg.tar.xz linux-custom-5.5.9.arch1-1-x86_64.pkg.tar.xz
@@ -93,7 +93,7 @@ echo "options i915 enable_dpcd_backlight=2" > /etc/modprobe.d/i915.conf
 exit
 reboot
 ```
-At the next reboot select the custom kernel and use the command `eve-screen-brightness.sh` to adjust the screen brightness.
+On next reboot select the custom kernel and use the command `eve-screen-brightness.sh` to adjust the screen brightness.
 
 ---
 
