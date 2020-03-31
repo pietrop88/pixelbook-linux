@@ -2,9 +2,11 @@
 
 This branch contains all the info to install **Archlinux** on a Pixelbook using the last available kernel version (v5.5.9).
 
+Before starting please read the parent repo [Readme](README.md#installing-real-linux-on-a-google-pixelbook).
+
 ## Open problems
 * audio: others (on the parent repo) solved this problem using the ChromeOS kernel version (v4.4) that contains the custom audio driver
-* suspend, hibernate: suspend was solved in the parent repo flashing the [MrChromebox](https://mrchromebox.tech)'s UEFI firmware
+* suspend, hibernate: suspend was solved in the parent repo flashing the [MrChromebox](https://mrchromebox.tech)'s UEFI firmware. It seems that it is not possible to solve this problem with the standard UEFI (see [1](https://www.reddit.com/r/GalliumOS/comments/b3eqv6/when_i_close_my_chromebook_lid_it_shuts_down_and/)).
 
 ## Solved problems
 * screen brightness with custom kernel patch. 
@@ -12,11 +14,8 @@ This branch contains all the info to install **Archlinux** on a Pixelbook using 
   Screen brightness can be controlled by writing an integer value between 0 and 65535 to `/sys/class/backlight/intel_backlight/brightness` file. There's also a `eve-screen-brightness.sh` script installed in `/usr/local/bin` that you can use to more easily set the brightness
 * touchpad with same feeling as in ChromeOS (solved by parent repo, needs xorg)
 * caps lock key
-* delete action with the key above the backspace key
+* delete key with the button above the backspace key
 * keyboard backlight (solved in the parent repo)
-
-Before starting please read the parent repo [Readme](README.md#installing-real-linux-on-a-google-pixelbook) that leads to the installation of a the standard Ubuntu 19.04 desktop version using the same kernel used in ChromeOS.
-
 
 ## On chrome OS
 
@@ -31,7 +30,7 @@ Use the [ChromeOS Firmware Utility Script](https://mrchromebox.tech/#fwscript) o
 cd;curl -O https://raw.githubusercontent.com/ethanmad/chromeos-resize/master/cros-resize.sh;sudo bash cros-resize.sh
 ```
 Select `GB`, `50 GB` for **STATE partition** and `1000 MB` for **KERN-C**. Reboot.
-STATE partition is the ChromeOS partition, KERN-C partiotion is the Arch boot partition. Obviously you can choose different sizes for the different partitions.
+STATE partition is the ChromeOS partition, KERN-C partition is the Arch boot partition. Obviously you can choose different sizes for the different partitions.
 
 [Guide1](https://saagarjha.com/blog/2019/03/13/dual-booting-chrome-os-and-elementary-os/), 
 [Guide2](https://gist.github.com/daemonp/ecead946317b175e3b54731a513efe94)
@@ -50,13 +49,15 @@ If, in any situations, the recovery boot screen is displayed, run the following 
 sudo crossystem dev_boot_legacy=1
 ```
 
+There is not a permanent solution with the standard UEFI firmware (see [1](https://www.reddit.com/r/GalliumOS/comments/b3eqv6/when_i_close_my_chromebook_lid_it_shuts_down_and/))
+
 ## On live distro
 
 Please follow the [Arch official guide steps](https://wiki.archlinux.org/index.php/Installation_guide).
 
 [Here](https://gist.github.com/pietrop88/9dce804b1f725ed9d5f047cd0ba7a66a), you can find the steps that I performed to install Arch on my Pixelbook.
 
-After installing Arch follow this steps to tailor Arch for Pixelbook.
+After installing Arch follow these steps to tailor Arch for Pixelbook.
 
 ### Touchpad and tweaks
 ```
@@ -93,8 +94,6 @@ exit
 reboot
 ```
 At the next reboot select the custom kernel and use the command `eve-screen-brightness.sh` to adjust the screen brightness.
-
-
 
 ---
 
