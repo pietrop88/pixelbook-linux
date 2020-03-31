@@ -12,7 +12,7 @@ Before starting please read the parent repo [Readme](README.md#installing-real-l
 * screen brightness with custom kernel patch. 
   
   Screen brightness can be controlled by writing an integer value between 0 and 65535 to `/sys/class/backlight/intel_backlight/brightness` file. There's also a `eve-screen-brightness.sh` script installed in `/usr/local/bin` that you can use to more easily set the brightness
-* touchpad with same feeling as in ChromeOS (solved by parent repo, needs xorg)
+* touchpad with same feeling as in ChromeOS (solved by parent repo, **needs xorg**)
 * caps lock key
 * delete key with the button above the backspace key
 * keyboard backlight (solved in the parent repo)
