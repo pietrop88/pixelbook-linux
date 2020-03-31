@@ -51,7 +51,7 @@ sudo crossystem dev_boot_legacy=1
 
 There is not a permanent solution with the standard UEFI firmware (see [1](https://www.reddit.com/r/GalliumOS/comments/b3eqv6/when_i_close_my_chromebook_lid_it_shuts_down_and/))
 
-## On live distro
+## Archlinux
 
 Please follow the [Arch official guide steps](https://wiki.archlinux.org/index.php/Installation_guide).
 
