@@ -3,7 +3,3 @@
 main_workdir: /opt/eve-linux-setup
 login_user: vagrant # override at command line with local username
 
-# tweaks.yml
-eve_keyboard_search_keycode: leftmeta
-eve_keyboard_assistant_keycode: leftmeta
-
