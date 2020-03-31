@@ -92,3 +92,10 @@
 - name: Trigger udev to apply keyboard rules
   become: true
   command: "udevadm trigger"
+
+- name: Disable suspend and hibernate when lid is closed
+  become: true
+  copy:
+    src: logind.conf
+    dest: /etc/systemd/logind.conf
+    mode: 0644
