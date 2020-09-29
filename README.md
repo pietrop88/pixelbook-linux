@@ -78,7 +78,8 @@ Before applying the following steps, read [this](https://wiki.archlinux.org/inde
 mkdir ~/kernel
 cd ~/kernel
 asp update linux
-asp export linuxcd linux
+asp export linux
+cd linux
 # change pkgbase in PKGBUILD file t o linux-5.5.9-custom
 curl https://gist.githubusercontent.com/pietrop88/9dce804b1f725ed9d5f047cd0ba7a66a/raw/f827a30652a60d5d88b2bea46cdc46a8e6165d7c/dpcd.patch --output dpcd.patch
 # add dpcd.patch to PKGBUILD file (source list)
